@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-boot-action
+  security:
+    enabled: false
+server:
+  port: 9911
+
+
