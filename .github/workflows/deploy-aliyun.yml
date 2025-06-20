@@ -1,4 +1,4 @@
-name: CI/CD with Docker Compose
+name: CI/CD with Aliyun Docker Compose
 
 on:
   push:
