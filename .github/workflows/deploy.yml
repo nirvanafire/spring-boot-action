@@ -40,7 +40,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-#            确保该目录下对应的项目已经拷贝下来
             cd /usr/local/service/spring-boot-action
             git pull
             docker-compose pull
