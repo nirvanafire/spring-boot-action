@@ -42,5 +42,5 @@ jobs:
           script: |
             cd /usr/local/service/spring-boot-action
             git pull
-            docker-compose pull
-            docker-compose up -d
+#            docker-compose pull
+#            docker-compose up -d
