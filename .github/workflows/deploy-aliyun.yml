@@ -32,6 +32,7 @@ jobs:
           VERSION="v1.0.$(date +%Y%m%d%H%M)"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "APP_VERSION=$VERSION" > .env      # 👈 写入 .env 文件
+          echo "DOCKER_NAMESPACE=registry.cn-hangzhou.aliyuncs.com/nirvanafire" > .env      # 👈 写入 .env 文件
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Login to Aliyun Docker Registry
