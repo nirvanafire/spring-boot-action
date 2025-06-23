@@ -55,7 +55,6 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-#          source: ".env,docker-compose.yml"
           source: ".env"
           target: "/usr/local/service/spring-boot-action"
 
@@ -67,6 +66,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /usr/local/service/spring-boot-action
-#            git pull
             docker-compose pull
             docker-compose up -d
