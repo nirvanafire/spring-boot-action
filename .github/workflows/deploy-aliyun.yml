@@ -7,6 +7,7 @@ on:
     paths: # Dockerfile或者src下代码发生变更才生效
       - 'Dockerfile'
       - 'src/**'
+      - 'docker-compose.yml'
 
 jobs:
   build-and-deploy:
@@ -25,14 +26,41 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
+      - name: Set version
+        id: version
+        run: |
+          VERSION="v1.0.$(date +%Y%m%d%H%M)"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "APP_VERSION=$VERSION" > .env      # 👈 写入 .env 文件
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Login to Aliyun Docker Registry
         run: echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login registry.cn-hangzhou.aliyuncs.com -u ${{ secrets.ALIYUN_USERNAME }} --password-stdin
 
       - name: Build Image
-        run: docker build -t registry.cn-hangzhou.aliyuncs.com/${{ secrets.ALIYUN_NAMESPACE }}/keep:spring-boot-action_1.1 .
+        run: docker build -t registry.cn-hangzhou.aliyuncs.com/${{ secrets.ALIYUN_NAMESPACE }}/keep:spring-boot-action_${{ env.VERSION }} .
 
       - name: Push to Aliyun
-        run: docker push registry.cn-hangzhou.aliyuncs.com/${{ secrets.ALIYUN_NAMESPACE }}/keep:spring-boot-action_1.1
+        run: docker push registry.cn-hangzhou.aliyuncs.com/${{ secrets.ALIYUN_NAMESPACE }}/keep:spring-boot-action_${{ env.VERSION }}
+
+      - name: Pull Code
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /usr/local/service/spring-boot-action
+            git pull
+
+      - name: Upload files to server
+        uses: appleboy/scp-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: ".env"
+          target: "/usr/local/service/spring-boot-action"
 
       - name: SSH to Server and Deploy
         uses: appleboy/ssh-action@v1.0.0
@@ -42,6 +70,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /usr/local/service/spring-boot-action
-            git pull
             docker-compose pull
             docker-compose up -d
