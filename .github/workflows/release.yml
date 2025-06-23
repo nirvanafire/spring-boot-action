@@ -1,0 +1,32 @@
+name: Build and Release Spring Boot JAR
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'         # 仅当你推送 tag（如 v1.0.0）时触发
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'     # 或 11, 根据你项目版本
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}  # 使用当前 tag 作为 release 名
+          name: Release ${{ github.ref_name }}
+          files: target/*.jar               # 上传 JAR 文件
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
