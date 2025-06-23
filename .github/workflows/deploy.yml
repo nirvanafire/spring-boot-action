@@ -3,10 +3,6 @@ name: CI/CD with Docker Compose
 on:
   workflow_dispatch: # 手动触发
 
-#  push:
-#    branches:
-#      - main
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
