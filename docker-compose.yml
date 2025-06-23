@@ -1,7 +1,7 @@
 services:
   spring-boot-action-app:
-#    image: santoszhou/keep:spring-boot-action_1.1
-    image: registry.cn-hangzhou.aliyuncs.com/nirvanafire/keep:spring-boot-action_1.1
+    image: santoszhou/keep:spring-boot-action_${APP_VERSION}
+#    image: registry.cn-hangzhou.aliyuncs.com/nirvanafire/keep:spring-boot-action_1.1
     container_name: spring-boot-action-app
     restart: always
     ports:
