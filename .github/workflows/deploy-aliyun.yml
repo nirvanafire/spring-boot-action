@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths: # Dockerfile或者src下代码发生变更才生效
+      - 'Dockerfile'
+      - 'src/**'
 
 jobs:
   build-and-deploy:
