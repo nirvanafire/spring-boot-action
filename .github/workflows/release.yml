@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*.*.*'         # 仅当你推送 tag（如 v1.0.0）时触发
 
+permissions:
+  contents: write   # 👈 允许创建 Release
+
 jobs:
   build-release:
     runs-on: ubuntu-latest
