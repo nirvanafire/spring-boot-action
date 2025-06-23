@@ -36,7 +36,7 @@ jobs:
           DOCKER_NAMESPACE="registry.cn-hangzhou.aliyuncs.com/nirvanafire"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "APP_VERSION=$VERSION" > .env      # 👈 写入 .env 文件
-          echo "DOCKER_NAMESPACE=$DOCKER_NAMESPACE" > .env      # 👈 写入 .env 文件
+          echo "DOCKER_NAMESPACE=$DOCKER_NAMESPACE" >> .env      # 👈 写入 .env 文件
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Login to Aliyun Docker Registry

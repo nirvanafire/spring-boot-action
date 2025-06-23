@@ -26,7 +26,7 @@ jobs:
           VERSION="v1.0.$(date +%Y%m%d%H%M)"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "APP_VERSION=$VERSION" > .env      # 👈 写入 .env 文件
-          echo "DOCKER_NAMESPACE=santoszhou" > .env      # 👈 写入 .env 文件
+          echo "DOCKER_NAMESPACE=santoszhou" >> .env      # 👈 写入 .env 文件
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Log in to Docker Hub # 登陆docker
