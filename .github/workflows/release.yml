@@ -27,9 +27,9 @@ jobs:
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}  # 使用当前 tag 作为 release 名
           name: Release ${{ github.ref_name }}
           files: target/*.jar               # 上传 JAR 文件
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

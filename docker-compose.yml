@@ -6,7 +6,7 @@ services:
     container_name: spring-boot-action-app
     restart: always
     ports:
-      - "8080:9911"
+      - "8080:8080"
     networks:
       - webnet
 
