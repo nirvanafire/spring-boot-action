@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre
 
 # 创建非 root 用户（安全）
 RUN addgroup -S app && adduser -S app -G app
