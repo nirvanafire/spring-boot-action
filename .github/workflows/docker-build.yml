@@ -59,5 +59,8 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
+          # ✅ buildx 缓存（关键），type=gha，使用 GitHub Actions 官方缓存
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/keep:spring-boot-action_${{ env.VERSION }}
