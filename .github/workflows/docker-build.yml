@@ -9,14 +9,7 @@ on:
     paths:
       - 'Dockerfile'
       - '.github/workflows/docker-build.yml'
-
-#on:
-#  push:
-#    branches:
-#      - main  # 监听 main 分支的提交
-#    paths: # Dockerfile或者src下代码发生变更才生效
-#      - 'Dockerfile'
-#      - 'src/**'
+      - 'src/**'
 
 jobs:
   build-and-push:

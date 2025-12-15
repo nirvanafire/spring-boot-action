@@ -4,6 +4,6 @@ spring:
   security:
     enabled: false
 server:
-  port: 9911
+  port: 8080
 
 
