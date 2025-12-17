@@ -31,7 +31,6 @@ jobs:
       - name: Set version
         id: version
         run: |
-#          VERSION="v1.0.$(date +%Y%m%d%H%M)"
           VERSION="v1.0.${{ github.run_number }}"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "APP_VERSION=$VERSION" > .env      # 👈 写入 .env 文件
