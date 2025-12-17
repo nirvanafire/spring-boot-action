@@ -33,7 +33,7 @@ jobs:
         id: version
         run: |
           VERSION="v1.0.$(date +%Y%m%d%H%M)"
-          DOCKER_NAMESPACE="registry.cn-hangzhou.aliyuncs.com/nirvanafire"
+          DOCKER_NAMESPACE="registry.cn-hangzhou.aliyuncs.com/${{ secrets.ALIYUN_NAMESPACE }}"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "APP_VERSION=$VERSION" > .env      # 👈 写入 .env 文件
           echo "DOCKER_NAMESPACE=$DOCKER_NAMESPACE" >> .env      # 👈 写入 .env 文件
